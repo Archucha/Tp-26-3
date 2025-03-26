@@ -29,7 +29,7 @@ namespace Tp_26_3
                     Apellido[i] = Console.ReadLine();
                     Console.WriteLine("Ingrese el tiempo");
                     Tiempo[i] = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Ingrese la altura en cm");
+                    Console.WriteLine("Ingrese la altura en centimetrosm");
                     Altura[i] = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ingrese la categoria 2007-2006-2005");
                     Categoria[i] = int.Parse(Console.ReadLine());

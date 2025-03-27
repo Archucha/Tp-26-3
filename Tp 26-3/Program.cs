@@ -10,11 +10,10 @@ namespace Tp_26_3
         public int NroParticipante;
         public string Nombre;
         public string Apellido;
-        public double Tiempo;
+        public int Tiempo;
         public int Altura;
         public int Categoria;
         public int i = 0;
-        public double mejtiempo = 9999999999999999;
 
         public void Carga(int nroParticipante)
         {
@@ -30,30 +29,13 @@ namespace Tp_26_3
             Console.WriteLine("Ingrese la categoria");
             Categoria = int.Parse(Console.ReadLine());
         }
-
-        public void MuestraMejTiemp()
-        {
-            for (int p = 0; p < i; p++)
-            {
-
-            }
-            Console.WriteLine("El mejor tiempo lo tiene");
-            Console.WriteLine("Numero de participante:" + NroParticipante);
-            Console.WriteLine("Nombre:" + Nombre);
-            Console.WriteLine("Apellido:" + Apellido);
-            Console.WriteLine("Tiempo:" + Tiempo);
-            Console.WriteLine("Categoria:" + Categoria);
-        }
-        public void MejorTiempoPorCategoria()
-        {
-
-        }
     }
     class Program
     {
         static void Main(string[] args)
         {
             List<Participante> participantes = new List<Participante>();
+            List<int> tiempoCategoria = new List<int>();
             List<int> categoriascomp = new List<int>();
             int j = 1;
             do
@@ -70,8 +52,23 @@ namespace Tp_26_3
                         if(participante.Categoria != categoria)
                         {
                             categoriascomp.Add(participante.Categoria);
+                            tiempoCategoria.Add(participante.Tiempo);
                             break;
                         }
+                        else
+                        {
+                            tiempoCategoria.Add(participante.Tiempo);
+                        }
+                        /*foreach (int c in tiempoCategoria)
+                        {
+                            int tiempoAux = int.MaxValue;
+
+                            if (c < tiempoAux)
+                            {
+                                tiempoAux = p.Tiempo;
+                                participanteMenorTiempo = p;
+                            }
+                    }*/
                     }
                     participantes.Add(participante);
                 }
@@ -86,7 +83,7 @@ namespace Tp_26_3
 
             foreach (Participante p in participantes)
             {
-                double tiempoAux = int.MaxValue;                
+                int tiempoAux = int.MaxValue;                
 
                 if (p.Tiempo < tiempoAux)
                 {
@@ -101,6 +98,7 @@ namespace Tp_26_3
             Console.WriteLine("Apellido:" + participanteMenorTiempo.Apellido);
             Console.WriteLine("Tiempo!:" + participanteMenorTiempo.Tiempo);
             Console.WriteLine("=====================================================================================");
+            
         }
     }
 }

@@ -1,40 +1,79 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tp_26_3
 {
-    public class Carrera
+    public class Participante
     {
-        public int[] NroParticipante;
-        public string[] Nombre;
-        public string[] Apellido;
-        public double[] Tiempo;
-        public int[] Altura;
-        public int[] Categoria;
+        public int NroParticipante;
+        public string Nombre;
+        public string Apellido;
+        public double Tiempo;
+        public int Altura;
+        public int Categoria;
         public int i = 0;
         public double mejtiempo = 9999999999999999;
-        public int posi;
-        public void Carga()
+
+        public void Carga(int nroParticipante)
         {
+            NroParticipante = nroParticipante;
+            Console.WriteLine("Ingrese el nombre");
+            Nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese el apellido");
+            Apellido = Console.ReadLine();
+            Console.WriteLine("Ingrese el tiempo");
+            Tiempo = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese la altura en centimetros");
+            Altura = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese la categoria");
+            Categoria = int.Parse(Console.ReadLine());
+        }
+
+        public void MuestraMejTiemp()
+        {
+            for (int p = 0; p < i; p++)
+            {
+
+            }
+            Console.WriteLine("El mejor tiempo lo tiene");
+            Console.WriteLine("Numero de participante:" + NroParticipante);
+            Console.WriteLine("Nombre:" + Nombre);
+            Console.WriteLine("Apellido:" + Apellido);
+            Console.WriteLine("Tiempo:" + Tiempo);
+            Console.WriteLine("Categoria:" + Categoria);
+        }
+        public void MejorTiempoPorCategoria()
+        {
+
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Participante> participantes = new List<Participante>();
+            List<int> categoriascomp = new List<int>();
             int j = 1;
             do
             {
                 Console.WriteLine("Ingrese el numero del participante");
                 Console.WriteLine("0 para salir");
-                NroParticipante[i] = int.Parse(Console.ReadLine());
-                if (NroParticipante[i] != 0)
+                var nroParticipante = int.Parse(Console.ReadLine());
+                if (nroParticipante != 0)
                 {
-                    Console.WriteLine("Ingrese el nombre");
-                    Nombre[i] = Console.ReadLine();
-                    Console.WriteLine("Ingrese el apellido");
-                    Apellido[i] = Console.ReadLine();
-                    Console.WriteLine("Ingrese el tiempo");
-                    Tiempo[i] = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Ingrese la altura en centimetrosm");
-                    Altura[i] = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Ingrese la categoria 2007-2006-2005");
-                    Categoria[i] = int.Parse(Console.ReadLine());
-                    i++;
-
+                    Participante participante = new Participante();
+                    participante.Carga(nroParticipante);
+                    foreach(int categoria in categoriascomp)
+                    {
+                        if(participante.Categoria != categoria)
+                        {
+                            categoriascomp.Add(participante.Categoria);
+                            break;
+                        }
+                    }
+                    participantes.Add(participante);
                 }
                 else
                 {
@@ -42,30 +81,26 @@ namespace Tp_26_3
                 }
             }
             while (j != 0);
-        }
-        public void MuestraMejTiemp()
-        {
-            for (int p = 0; p < i; p++)
+
+            Participante participanteMenorTiempo = null;
+
+            foreach (Participante p in participantes)
             {
-                if (mejtiempo < Tiempo[p])
+                double tiempoAux = int.MaxValue;                
+
+                if (p.Tiempo < tiempoAux)
                 {
-                    mejtiempo = Tiempo[p];
-                    posi = p;
+                    tiempoAux = p.Tiempo;
+                    participanteMenorTiempo = p;
                 }
             }
-            Console.WriteLine("El mejor tiempo lo tiene");
-            Console.WriteLine("Numero de participante:" + NroParticipante[posi]);
-            Console.WriteLine("Nombre:" + Nombre[posi]);
-            Console.WriteLine("Apellido:" + Apellido[posi]);
-            Console.WriteLine("Tiempo:" + Tiempo[posi]);
-            Console.WriteLine("Categoria:" + Categoria[posi]);
-        }
-    }
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            
+            Console.WriteLine("=====================================================================================");
+            Console.WriteLine("El participante con el menor tiempo es: ");
+            Console.WriteLine("Numero De Participante:" + participanteMenorTiempo.NroParticipante);
+            Console.WriteLine("Nombre:" + participanteMenorTiempo.Nombre);
+            Console.WriteLine("Apellido:" + participanteMenorTiempo.Apellido);
+            Console.WriteLine("Tiempo!:" + participanteMenorTiempo.Tiempo);
+            Console.WriteLine("=====================================================================================");
         }
     }
 }
